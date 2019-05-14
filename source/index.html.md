@@ -465,7 +465,7 @@ hub.SetDIResetLock(false);
 ```
 Pass 1/true to prevent DI (capacitive sensor) reset, set to 0 to allow it. This allows a game to control when the hub may reset the capacitive touch sensor (DI) board.
 
-It's adviced to lock DI Resets during an interaction, and unlock them when the interaction is done. This way the touchpads can be recalibrated while they aren't in use.
+Best practice is to lock the capacitive sensor during an interaction and unlock it when the interaction is done. This way the touchpads can be recalibrated while they aren't in use.
 
 ## ResetDI()
 ```cpp
