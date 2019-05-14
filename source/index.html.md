@@ -42,9 +42,12 @@ HubInterface hub;
 
 ```cpp
 void setup() {
-  
-  Serial1.begin(38400);  // needed for device layer (hub) communication
-  hub.Initialize();
+
+  // Initializes the hub and passes the current filename as ID for reporting
+
+  hub.Initialize(__FILE__);
+  // You can also pass your own ID like so
+  // hub.Initialize("MyAwesomeGame");
 
   // Other setup commands go here
 }
@@ -53,7 +56,9 @@ void setup() {
 ### setup() 
 
 
-Within the <code>setup</code> function make sure to set up serial communication with the rest of the Hub and then initialize it.
+Within the <code>setup</code> function make sure to initialize the Hub, and pass it the name of your challenge.
+
+This name will be used in the reporting. If you just pass it <code>__FILE__</code> it will use the current file name.
 
 ```cpp
 void loop() {
@@ -128,7 +133,7 @@ Wait for a condition while yielding whenever the condition is not true. Passes t
 
 ```cpp
 // EXAMPLE USAGE
-yield_sleep(50, false); // wait for 50 us 
+yield_sleep(50, false); // wait for 50 us
 ```
 
 ### yield_sleep(*wait_time_in_microseconds*, *ret*)
@@ -159,7 +164,7 @@ Yield only if a condition is true (e.g. enough time has passed).
 
 The constructor for the HubInterface. The HubInterface is created automatically and this constructor doesn't usually need to be explicitly called.
 
-## Run(()
+## Run()
 
 ```cpp
 // SYNTAX
@@ -173,7 +178,9 @@ void loop()
 
 ```
 
-Advance the device layer state machine, with forHowLong milliseconds as the max time available to spend performing library tasks (e.g., communicating with the rest of the device). It is expected that it will be called every cycle of a loop() function.
+Advance the device layer state machine, with `forHowLong` milliseconds as the maximum time available to spend performing library tasks (e.g., communicating with the rest of the device). It is expected that it will be called every cycle of a loop() function.
+
+A good value for `forHowLong` is `20`, this makes for a nice and responsive hub.
 
 ## IsReady()
 
@@ -182,7 +189,7 @@ Advance the device layer state machine, with forHowLong milliseconds as the max 
 bool ready_bool = hub.IsReady();
 ```
 
-Whether or not the hub is ready to carry out other commands.
+Returns whether or not the hub is ready to carry out other commands.
 
 ## SetLights()
 
@@ -197,11 +204,11 @@ SetLights(hub.LIGHT_LEFT, 0, 80, 0); // Make the left touchpad lights blue with 
 hub.SetLights(hub.LIGHT_LEFT | hub.LIGHT_RIGHT, 30, 30, 0);
 ```
 
-Set light colors with slew (overloaded below for flashing).
+Set light colors with slew, or fade-in time (overloaded below for flashing).
 
-*whichLights*: see LIGHT_... constants 
+*whichLights*: see LIGHT_... constants
 
-In this class colors and slew can be between [0, 99] each
+In this class colors and slew can each have a value between [0, 99]
 
 Constant   | Value     | Description
 -----------|-----------|------------
@@ -229,9 +236,9 @@ hub.SetLightsRGB(hub.LIGHT_CUE, 99, 0, 0, 0);
 
 Set light colors with slew using RGB, not BY colors 
 
-In this class colors and slew can be between [0, 99] each
-
 *whichLights*: see LIGHT_... constants 
+
+In this class colors and slew can each have a value between [0, 99]
 
 Constant   | Value     | Description
 -----------|-----------|------------
@@ -258,9 +265,9 @@ Set lights to flash with given period.
 
 *on*: [duty cycle] * 10 ms, must be < period
 
-*green*, *blue*, *period*, *on*: can be in [0, 99]
+*yellow*, *blue*, *period*, *on*: can each have a value between [0, 99]
 
-*whichLights*: see LIGHT_... constants 
+*whichLights*: see LIGHT_... constants
 
 Constant   | Value     | Description
 -----------|-----------|------------
@@ -287,9 +294,9 @@ Set lights to flash with given period, using RGB not BY period in 10 ms incremen
 
 *on*: [duty cycle] * 10 ms, must be < period
 
-*red*, *green*, *blue*, *period*, *on*: can be in [0, 99]
+*red*, *green*, *blue*, *period*, *on*: can each have a value between [0, 99]
 
-*whichLights*: see LIGHT_... constants 
+*whichLights*: see LIGHT_... constants
 
 Constant   | Value     | Description
 -----------|-----------|------------
@@ -312,13 +319,13 @@ hub.SetRandomButtonLights(2, 60, 60, 0, 0);
 
 Convenience function to randomly pick and illuminate a number of touchpad lights (numLights: how many. Max 3).
 
-*returns* tgtLight: bitwise OR of light ID's selected as "targets" 
+*returns* tgtLight: bitwise OR of light ID's selected as "targets"
 
-*period*: in 10 ms increments, 0=no flash 
+*period*: in 10 ms increments, 0=no flash
 
-*on*: duty cycle, 10 ms increments. must be < period 
+*on*: duty cycle, 10 ms increments. must be < period
 
-*yellow*, *blue*, *period*, *on*: can be [0, 99] each
+*yellow*, *blue*, *period*, *on*: can each have a value between [0, 99]
 
 <aside class="notice">
 "Touchpad" and "pad" are the preferred ways to refer to the touchpads, but the code sometimes uses "button".
@@ -338,16 +345,16 @@ Play audio according to specified audio file ID.
 
 *whichAudio*: see AUDIO_... constants below
 
-*volume*: [0, 99]
+*volume*: can have a value between [0, 99]
 
 Constant name| Description | Used in curriculum |
 -------------|-------------|--------------------|
-|AUDIO_ENTICE| Artificial squeaker        | No  | 
+|AUDIO_ENTICE| Artificial squeaker        | No  |
 |AUDIO_POSITIVE| Reward sound             | Yes |
-|AUDIO_DO| Single click                   | Yes | 
+|AUDIO_DO| Single click                   | Yes |
 |AUDIO_CLICK| Clicker sound               | No  |
 |AUDIO_SQUEAK| Natural squeaker           | No  |
-|AUDIO_NEGATIVE| Descending low tone      | Yes | 
+|AUDIO_NEGATIVE| Descending low tone      | Yes |
 |AUDIO_L| Left touchpad sound             | Yes |
 |AUDIO_M| Middle touchpad sound           | Yes |
 |AUDIO_R| Right touchpad sound            | Yes |
@@ -438,9 +445,8 @@ GetNeedsDIReset()
 // EXAMPLE USAGE
 hub.GetNeedsDIReset();
 ```
-Return value of _csf_needs_DI_reset
 
-If it returns **true** the Hub's capacitive touchpads need to be reset. 
+If this function returns **true** the Hub's capacitive touchpads need to be reset.
 
 *(see Run function implementation for use)*
 
@@ -454,10 +460,12 @@ SetDIResetLock(bool)
 // ... do setup that gets game ready to be played ...
 hub.SetDIResetLock(true);
 // ... gameplay code ...
-// end of interaction. Beginning of inter-game period 
+// end of interaction. Beginning of inter-challenge period
 hub.SetDIResetLock(false);
 ```
-Pass 1/true to prevent DI (capacitive sensor) reset, set to 0 to allow it - allows a game to control when hub/dli may reset the capacitive touch sensor (DI) board
+Pass 1/true to prevent DI (capacitive sensor) reset, set to 0 to allow it. This allows a game to control when the hub may reset the capacitive touch sensor (DI) board.
+
+Best practice is to lock the capacitive sensor during an interaction and unlock it when the interaction is done. This way the touchpads can be recalibrated while they aren't in use.
 
 ## ResetDI()
 ```cpp
@@ -466,7 +474,7 @@ hub.ResetDI();
 ```
 Reset the capacitive touch sensor board.
 
-<aside class="warning"> Make sure when this functionn is called there's no need to use the touchpads.</aside>
+<aside class="warning"> Make sure when this functionn is called the touchpads aren't in use. This will reset the lights and touches won't be registered.</aside>
 *(see Run function implementation for use)*
 
 ## ResetFoodMachine()
@@ -504,13 +512,13 @@ switch (pressed)
   case hub.BUTTON_LEFT:
     Log.info("Pressed left");
     break;
-  
+
   case hub.BUTTON_MIDDLE:
     Log.info("Pressed middle");
     break;
 
   case hub.BUTTON_RIGHT:
-    Log.info("Pressed righ");
+    Log.info("Pressed right");
     break;
 }
 ```
@@ -571,7 +579,7 @@ Return dome open state (int)
 Returned| Meaning
 --------|--------
       -1| unknown
-       0| closed 
+       0| closed
        1| open
 
 ## IsDomeRemoved()
@@ -590,10 +598,10 @@ SetButtonAudioEnabled(bool buttonAudioEnabled)
 
 // EXAMPLE USAGE
 
-bool MyGame() 
+bool MyGame()
 {
   // ... do interaction setup ...
-  hub.SetButtonAudioEnabled(true); // game is ready to go, make touchapds noisier
+  hub.SetButtonAudioEnabled(true); // game is ready to go, make touchapads noisier
 
   // ... game ended, turn off touchpad sounds ...
   hub.SetButtonAudioEnabled(false);
@@ -637,10 +645,10 @@ Turn diagnostic polling (from the HubInterface) on and off.
 bool no_food = hub.IsHubOutOfFood();
 if (no_food)
 {
-  Particle.publish("..."); // (not an actual Particle webhook) perhaps send an SMS message ? 
+  Particle.publish("..."); // (not an actual Particle webhook) perhaps send an SMS message ?
 }
 ```
-Return true if hub is out of food
+Returns `true` if hub is out of food
 
 ## IsSingulatorError()
 
@@ -648,18 +656,18 @@ Return true if hub is out of food
 // EXAMPLE USAGE
 if (hub.IsSingulatorError())
 {
-  Particle.publish("..."); // (not an actual Particle webhook) perhaps send an SMS message ? 
+  Particle.publish("..."); // (not an actual Particle webhook) perhaps send an SMS message ?
 }
 ```
 
-Return true if singulator error, for example if singulator jammed
+Returns `true` if singulator error, for example if singulator is jammed
 
 ## Report()
 ```cpp
 // SYNTAX
 Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten)
 
-//////// OR, WITH EXTRA //////////
+//////// OR, WITH EXTRA FIELD//////////
 
 Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)
 
@@ -667,16 +675,15 @@ Report(String play_start_time, String player, String challenge_id, uint32_t leve
 unsigned char pressed = hub.AnyButtonPressed();
 
 String extras = String::format( "{\"pressed\":\"%c%c%c\"}",
-            (pressed & 0b001 ? '1' : '0'),
-            (pressed & 0b010 ? '1' : '0'),
-            (pressed & 0b100 ? '1' : '0'));
+            (pressed & hub.BUTTON_LEFT ? '1' : '0'),
+            (pressed & hub.BUTTON_MIDDLE ? '1' : '0'),
+            (pressed & hub.BUTTON_RIGHT ? '1' : '0'));
 
 // Only record when there was an interaction
 hub.Report( Time.format(Time.now(), TIME_FORMAT_ISO8601_FULL),    // play_start_time
             "Pet, Clever",                                         // player
-            "LearningTheApi",                                        // challenge_id
             1,     // difficulty increases with level. So level 1 is 3 pads, level 2 is 2 pads, level 3 is 1 pad
-            "my_result, // result
+            "my_result", // result
             0, // (ms) duration
             1,   // since we're presenting foodtreats 100% of the time
             1 ? foodtreat_state == hub.PACT_RESPONSE_FOODTREAT_TAKEN : 0,// foodtreat_eaten
@@ -701,6 +708,10 @@ extra| custom field for extra metrics  | char
 *Return*                                             
  * True if successful, False otherwise         
 
-## Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)
+## Report() with extra field
 
-As above, send a report message with standard fields and extra field to the particle cloud, including a JSON-formatted "extra" field. Returns true if successful.
+As above, send a report message with standard fields to the particle cloud, including a JSON-formatted "extra" field. Returns true if successful.
+
+<aside class="notice">
+The `extra` field needs to be a valid JSON string for it to show up propperly in the report sheet.
+</aside>
