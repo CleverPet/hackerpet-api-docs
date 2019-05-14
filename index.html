@@ -1,0 +1,1186 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>HackerPet Particle Library reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;cpp&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="cpp">cpp</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#getting-started" class="toc-h2 toc-link" data-title="Getting started">Getting started</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#yield-macro-quot-magic-quot" class="toc-h1 toc-link" data-title="Yield macro "magic"">Yield macro "magic"</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#macros" class="toc-h2 toc-link" data-title="Macros">Macros</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#hubinterface" class="toc-h1 toc-link" data-title="HubInterface">HubInterface</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#hubinterface-2" class="toc-h2 toc-link" data-title="HubInterface()">HubInterface()</a>
+                  </li>
+                  <li>
+                    <a href="#run" class="toc-h2 toc-link" data-title="Run(()">Run(()</a>
+                  </li>
+                  <li>
+                    <a href="#isready" class="toc-h2 toc-link" data-title="IsReady()">IsReady()</a>
+                  </li>
+                  <li>
+                    <a href="#setlights" class="toc-h2 toc-link" data-title="SetLights()">SetLights()</a>
+                  </li>
+                  <li>
+                    <a href="#setlightsrgb" class="toc-h2 toc-link" data-title="SetLightsRGB()">SetLightsRGB()</a>
+                  </li>
+                  <li>
+                    <a href="#setlights-flashing-variant" class="toc-h2 toc-link" data-title="SetLights() flashing variant">SetLights() <em>flashing variant</em></a>
+                  </li>
+                  <li>
+                    <a href="#setlightsrgb-flashing-variant" class="toc-h2 toc-link" data-title="SetLightsRGB() flashing variant">SetLightsRGB() <em>flashing variant</em></a>
+                  </li>
+                  <li>
+                    <a href="#setrandombuttonlights" class="toc-h2 toc-link" data-title="SetRandomButtonLights()">SetRandomButtonLights()</a>
+                  </li>
+                  <li>
+                    <a href="#playaudio" class="toc-h2 toc-link" data-title="PlayAudio()">PlayAudio()</a>
+                  </li>
+                  <li>
+                    <a href="#playtone" class="toc-h2 toc-link" data-title="PlayTone()">PlayTone()</a>
+                  </li>
+                  <li>
+                    <a href="#presentfoodtreat" class="toc-h2 toc-link" data-title="PresentFoodtreat()">PresentFoodtreat()</a>
+                  </li>
+                  <li>
+                    <a href="#presentandcheckfoodtreat" class="toc-h2 toc-link" data-title="PresentAndCheckFoodtreat()">PresentAndCheckFoodtreat()</a>
+                  </li>
+                  <li>
+                    <a href="#retracttray" class="toc-h2 toc-link" data-title="RetractTray()">RetractTray()</a>
+                  </li>
+                  <li>
+                    <a href="#getneedsdireset" class="toc-h2 toc-link" data-title="GetNeedsDIReset()">GetNeedsDIReset()</a>
+                  </li>
+                  <li>
+                    <a href="#setdiresetlock-bool" class="toc-h2 toc-link" data-title="SetDIResetLock(bool)">SetDIResetLock(bool)</a>
+                  </li>
+                  <li>
+                    <a href="#resetdi" class="toc-h2 toc-link" data-title="ResetDI()">ResetDI()</a>
+                  </li>
+                  <li>
+                    <a href="#resetfoodmachine" class="toc-h2 toc-link" data-title="ResetFoodMachine()">ResetFoodMachine()</a>
+                  </li>
+                  <li>
+                    <a href="#getbuttonval-unsigned-char-whichbutton" class="toc-h2 toc-link" data-title="GetButtonVal(unsigned char whichButton)">GetButtonVal(unsigned char whichButton)</a>
+                  </li>
+                  <li>
+                    <a href="#anybuttonpressed" class="toc-h2 toc-link" data-title="AnyButtonPressed()">AnyButtonPressed()</a>
+                  </li>
+                  <li>
+                    <a href="#isbuttonpressed-unsigned-char-whichbutton" class="toc-h2 toc-link" data-title="IsButtonPressed(unsigned char whichButton)">IsButtonPressed(unsigned char whichButton)</a>
+                  </li>
+                  <li>
+                    <a href="#foodmachinestate" class="toc-h2 toc-link" data-title="FoodmachineState()">FoodmachineState()</a>
+                  </li>
+                  <li>
+                    <a href="#getdomeopen" class="toc-h2 toc-link" data-title="GetDomeOpen()">GetDomeOpen()</a>
+                  </li>
+                  <li>
+                    <a href="#isdomeremoved" class="toc-h2 toc-link" data-title="IsDomeRemoved()">IsDomeRemoved()</a>
+                  </li>
+                  <li>
+                    <a href="#setbuttonaudioenabled-bool-buttonaudioenabled" class="toc-h2 toc-link" data-title="SetButtonAudioEnabled(bool buttonAudioEnabled)">SetButtonAudioEnabled(bool buttonAudioEnabled)</a>
+                  </li>
+                  <li>
+                    <a href="#setmaxaudioamplitude-unsigned-char-max_audio_amplitude" class="toc-h2 toc-link" data-title="SetMaxAudioAmplitude(unsigned char max_audio_amplitude)">SetMaxAudioAmplitude(unsigned char max_audio_amplitude)</a>
+                  </li>
+                  <li>
+                    <a href="#setdopollbuttons" class="toc-h2 toc-link" data-title="SetDoPollButtons()">SetDoPollButtons()</a>
+                  </li>
+                  <li>
+                    <a href="#setdopolldiagnostics" class="toc-h2 toc-link" data-title="SetDoPollDiagnostics()">SetDoPollDiagnostics()</a>
+                  </li>
+                  <li>
+                    <a href="#ishuboutoffood" class="toc-h2 toc-link" data-title="IsHubOutOfFood()">IsHubOutOfFood()</a>
+                  </li>
+                  <li>
+                    <a href="#issingulatorerror" class="toc-h2 toc-link" data-title="IsSingulatorError()">IsSingulatorError()</a>
+                  </li>
+                  <li>
+                    <a href="#report" class="toc-h2 toc-link" data-title="Report()">Report()</a>
+                  </li>
+                  <li>
+                    <a href="#report-string-play_start_time-string-player-string-challenge_id-uint32_t-level-string-result-uint32_t-duration-bool-foodtreat_presented-bool-foodtreat_eaten-string-extra" class="toc-h2 toc-link" data-title="Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)">Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/CleverPet/HackerPet'>HackerPet on Github</a></li>
+            <li><a class="typeform-share link" href="https://cleverpet.typeform.com/to/Z47lWd" data-mode="popup" style="color:#CDCFD2;text-decoration:underline;font-size:14px;" data-hide-headers=true data-hide-footer=true data-submit-close-delay="5" target="_blank">No Hub? </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p><code>hackerpet</code> is an open source library for programmatically controlling a CleverPet Hub and reporting the data it produces. It takes advantage of the fact that most CleverPet Hubs use a Particle Photon which can be easily replaced with your own.  This library enables your Photon to give you full control over the Hub&#39;s touchpads, sounds, and food reward presentation.</p>
+
+<p>If you&#39;ve not done so already, please visit <a href="https://hackerpet.com">hackerpet.com</a></p>
+<h2 id='getting-started'>Getting started</h2>
+<p>Along with a port of CleverPet&#39;s <a href="http://hackerpet.com/cleverpet-curriculum/">complete original training curriculum</a>, hackerpet exists as a <a href="https://build.particle.io/libs/hackerpet/">library on the Particle platform.</a>. </p>
+<pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;hackerpet.h&gt;
+</span></code></pre><h3 id='library'>Library</h3>
+<p>All your examples must explicitly include the hackerpet library ... </p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">HubInterface</span> <span class="n">hub</span><span class="p">;</span>
+</code></pre><h3 id='hubinterface-declaration'>HubInterface declaration</h3>
+<p>... and subsequently declare the variable that will be used to access your Hub&#39;s functionality.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="n">Serial1</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">38400</span><span class="p">);</span>  <span class="c1">// needed for device layer (hub) communication
+</span>  <span class="n">hub</span><span class="p">.</span><span class="n">Initialize</span><span class="p">();</span>
+
+  <span class="c1">// Other setup commands go here
+</span><span class="p">}</span>
+</code></pre><h3 id='setup'>setup()</h3>
+<p>Within the <code>setup</code> function make sure to set up serial communication with the rest of the Hub and then initialize it.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="n">hub</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// do 20 ms of communication with the rest of the Hub 
+</span>  <span class="c1">//MyOwnFunction(); 
+</span>
+<span class="p">}</span>
+</code></pre><h3 id='loop-function'>loop() function</h3>
+<p>Usually, you&#39;ll have a function that gets called repeatedly within loop() that will control the behavior of your Hub (presenting lights, distributing foodtreats, etc.).</p>
+<h1 id='yield-macro-quot-magic-quot'>Yield macro &quot;magic&quot;</h1>
+<p>The HackerPet library provides a set of macros that make programming the Hub much faster, more concise, and more easily understood. These macros let you &quot;yield&quot; from the function, temporarily exiting and re-entering at the same position.  Essentially, these macros grab the function&#39;s line number and then jump back to this line when the function is re-entered. This lets the funtion momentarily surrender the Photon to the HackerPet library and give it an opportunity to tell the rest of the Hub to turn on its lights, play sounds, dispense foodtreats, etc.</p>
+
+<p>There are a few things to consider when using yield macros:</p>
+
+<ul>
+<li>They are ideal for moments when your code would block. E.g., during delays or when waiting for input. Yielding can also be helpful when you want to give the HubInterface a moment to send out instructions, as it can only handle so many at once.</li>
+<li>Functions in which you’d like to use yield(…) must begin with a yield_begin() and a yield_finish(). This is demonstrated in the examples.</li>
+<li>No recursion allowed.</li>
+<li>All local variables must be static. This means that they won’t get re-initialized and receive a new value the next time the function is entered, so be sure to explicitly initialize them to the value you want in a separate statement. To keep things clean, any variable declarations that start with <code>static</code> should not be initialized.</li>
+<li>Whenever the function “yields” it returns a value. This can be helpful for telling you whether the function is actually over, or if it’s still working.</li>
+</ul>
+<h2 id='macros'>Macros</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">bool</span> <span class="nf">MyFunction</span><span class="p">()</span> 
+<span class="p">{</span>
+  <span class="n">yield_begin</span><span class="p">();</span>
+
+  <span class="n">yield_wait_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="n">yield_finish</span><span class="p">();</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><h3 id='yield_begin'>yield_begin()</h3>
+<p>Place this at start of any function that uses yield statement</p>
+<h3 id='yield_finish'>yield_finish()</h3>
+<p>Place at end of any function that uses yield statement</p>
+<pre class="highlight cpp tab-cpp"><code><span class="c1">//EXAMPLE USAGE
+</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_ms</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_ms</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="c1">// Pause for 1000 milliseconds
+</span><span class="p">{</span>
+  <span class="n">yield</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span> <span class="c1">// Yield program flow (e.g. to HackerPet library)
+</span><span class="p">}</span>
+</code></pre><h3 id='yield-ret'>yield(<em>ret</em>)</h3>
+<p>Yield execution of your yield enabled function while returning <code>ret</code>. Next time your yield enabled function is called, execution will continue the last yield point.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">start_wait</span> <span class="o">=</span> <span class="n">Time</span><span class="p">.</span><span class="n">now</span><span class="p">();</span>
+<span class="n">yield_wait_for</span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_wait</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span> <span class="c1">// wait for 10 seconds
+</span></code></pre><h3 id='yield_wait_for-condition-ret'>yield_wait_for(<em>condition</em>, <em>ret</em>)</h3>
+<p>Wait for a condition while yielding whenever the condition is not true. Passes the <code>ret</code> parameter whenever yielding.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">yield_sleep</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// wait for 50 us 
+</span></code></pre><h3 id='yield_sleep-wait_time_in_microseconds-ret'>yield_sleep(<em>wait_time_in_microseconds</em>, <em>ret</em>)</h3>
+<p>Wait for the specified number of microseconds, yielding while waiting. Uses particle micros() function, which overflows when it reaches 2^32 (i.e., every ~71.6 minutes)</p>
+<pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">yield_sleep_ms</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// wait for 300 ms
+</span></code></pre><h3 id='yield_sleep_ms-wait_time_in_milliseconds-ret'>yield_sleep_ms(<em>wait_time_in_milliseconds</em>, <em>ret</em>)</h3>
+<p>Wait for the specified number of milliseconds, yielding while waiting. Uses millis() function, which overflows and returns to zero every ~49 days</p>
+<pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE 
+</span> <span class="n">yield_if</span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">some_time_value</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span>
+</code></pre><h3 id='yield_if-bool-ret'>yield_if(<em>bool</em>, <em>ret</em>)</h3>
+<p>Yield only if a condition is true (e.g. enough time has passed).</p>
+<h1 id='hubinterface'>HubInterface</h1><h2 id='hubinterface-2'>HubInterface()</h2>
+<p>The constructor for the HubInterface. The HubInterface is created automatically and this constructor doesn&#39;t usually need to be explicitly called.</p>
+<h2 id='run'>Run(()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">Run</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">forHowLong</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="kt">void</span> <span class="n">loop</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">hub</span><span class="p">.</span><span class="n">Run</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre>
+<p>Advance the device layer state machine, with forHowLong milliseconds as the max time available to spend performing library tasks (e.g., communicating with the rest of the device). It is expected that it will be called every cycle of a loop() function.</p>
+<h2 id='isready'>IsReady()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">bool</span> <span class="n">ready_bool</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">IsReady</span><span class="p">();</span>
+</code></pre>
+<p>Whether or not the hub is ready to carry out other commands.</p>
+<h2 id='setlights'>SetLights()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetLights</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whichLights</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">yellow</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">blue</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">slew</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">SetLights</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Make the left touchpad lights blue with brightness 80
+</span>
+<span class="c1">// Make the left and right light touchpads "white" ("equal" parts yellow and blue) with brightness 30
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetLights</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_LEFT</span> <span class="o">|</span> <span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_RIGHT</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre>
+<p>Set light colors with slew (overloaded below for flashing).</p>
+
+<p><em>whichLights</em>: see LIGHT_... constants </p>
+
+<p>In this class colors and slew can be between [0, 99] each</p>
+
+<table><thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LIGHT_LEFT</td>
+<td>0b00000001</td>
+<td>Left touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_MIDDLE</td>
+<td>0b00000010</td>
+<td>Middle touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_RIGHT</td>
+<td>0b00000100</td>
+<td>Right touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_CUE</td>
+<td>0b00001000</td>
+<td>Cue (also &quot;status&quot;) light</td>
+</tr>
+<tr>
+<td>LIGHT_BTNS</td>
+<td>0b00000111</td>
+<td>All the buttons/touchpads</td>
+</tr>
+<tr>
+<td>LIGHT_ALL</td>
+<td>0b00001111</td>
+<td>All the above</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+While most humans have trichromatic vision (all the colors we can see can be described as a combination of red, green, and blue), most dogs and cats are dichromats only able to see the equivalent of human yellow and blue. This means that, in making games for dogs and cats, we usually only care about color settings expressed as "BY" rather than "RGB".
+</aside>
+<h2 id='setlightsrgb'>SetLightsRGB()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetLightsRGB</span><span class="p">(</span><span class="kt">char</span> <span class="n">whichLights</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">red</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">green</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">blue</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">slew</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetLightsRGB</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_CUE</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre>
+<p>Set light colors with slew using RGB, not BY colors </p>
+
+<p>In this class colors and slew can be between [0, 99] each</p>
+
+<p><em>whichLights</em>: see LIGHT_... constants </p>
+
+<table><thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LIGHT_LEFT</td>
+<td>0b00000001</td>
+<td>Left touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_MIDDLE</td>
+<td>0b00000010</td>
+<td>Middle touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_RIGHT</td>
+<td>0b00000100</td>
+<td>Right touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_CUE</td>
+<td>0b00001000</td>
+<td>Cue (also &quot;status&quot;) light</td>
+</tr>
+<tr>
+<td>LIGHT_BTNS</td>
+<td>0b00000111</td>
+<td>All the buttons/touchpads</td>
+</tr>
+<tr>
+<td>LIGHT_ALL</td>
+<td>0b00001111</td>
+<td>All the above</td>
+</tr>
+</tbody></table>
+<h2 id='setlights-flashing-variant'>SetLights() <em>flashing variant</em></h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetLights</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whichLights</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">yellow</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">blue</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">period</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">on</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetLights</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_BTNS</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span> <span class="c1">// Every 600 ms set light to flash for 300 
+</span></code></pre>
+<p>Set lights to flash with given period.</p>
+
+<p><em>period</em>: [Period duration] * 10 ms. (0 =&gt; no flashing)</p>
+
+<p><em>on</em>: [duty cycle] * 10 ms, must be &lt; period</p>
+
+<p><em>green</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can be in [0, 99]</p>
+
+<p><em>whichLights</em>: see LIGHT_... constants </p>
+
+<table><thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LIGHT_LEFT</td>
+<td>0b00000001</td>
+<td>Left touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_MIDDLE</td>
+<td>0b00000010</td>
+<td>Middle touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_RIGHT</td>
+<td>0b00000100</td>
+<td>Right touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_CUE</td>
+<td>0b00001000</td>
+<td>Cue (also &quot;status&quot;) light</td>
+</tr>
+<tr>
+<td>LIGHT_BTNS</td>
+<td>0b00000111</td>
+<td>All the buttons/touchpads</td>
+</tr>
+<tr>
+<td>LIGHT_ALL</td>
+<td>0b00001111</td>
+<td>All the above</td>
+</tr>
+</tbody></table>
+<h2 id='setlightsrgb-flashing-variant'>SetLightsRGB() <em>flashing variant</em></h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="cp">## SetLightsRGB(unsigned char whichLights, unsigned char red, unsigned char green, unsigned char blue, unsigned char period, unsigned char on)
+</span>
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetLightsRGB</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_ALL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// Every 990 ms set the Hub to flash red for 10 ms
+</span></code></pre>
+<p>Set lights to flash with given period, using RGB not BY period in 10 ms increments.</p>
+
+<p><em>period</em>: [Period duration] * 10 ms. (0 =&gt; no flashing)</p>
+
+<p><em>on</em>: [duty cycle] * 10 ms, must be &lt; period</p>
+
+<p><em>red</em>, <em>green</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can be in [0, 99]</p>
+
+<p><em>whichLights</em>: see LIGHT_... constants </p>
+
+<table><thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LIGHT_LEFT</td>
+<td>0b00000001</td>
+<td>Left touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_MIDDLE</td>
+<td>0b00000010</td>
+<td>Middle touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_RIGHT</td>
+<td>0b00000100</td>
+<td>Right touchpad light</td>
+</tr>
+<tr>
+<td>LIGHT_CUE</td>
+<td>0b00001000</td>
+<td>Cue (also &quot;status&quot;) light</td>
+</tr>
+<tr>
+<td>LIGHT_BTNS</td>
+<td>0b00000111</td>
+<td>All the buttons/touchpads</td>
+</tr>
+<tr>
+<td>LIGHT_ALL</td>
+<td>0b00001111</td>
+<td>All the above</td>
+</tr>
+</tbody></table>
+<h2 id='setrandombuttonlights'>SetRandomButtonLights()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetRandomButtonLights</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">numLights</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">yellow</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">blue</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">period</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">on</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetRandomButtonLights</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre>
+<p>Convenience function to randomly pick and illuminate a number of touchpad lights (numLights: how many. Max 3).</p>
+
+<p><em>returns</em> tgtLight: bitwise OR of light ID&#39;s selected as &quot;targets&quot; </p>
+
+<p><em>period</em>: in 10 ms increments, 0=no flash </p>
+
+<p><em>on</em>: duty cycle, 10 ms increments. must be &lt; period </p>
+
+<p><em>yellow</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can be [0, 99] each</p>
+
+<aside class="notice">
+"Touchpad" and "pad" are the preferred ways to refer to the touchpads, but the code sometimes uses "button".
+</aside>
+<h2 id='playaudio'>PlayAudio()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">PlayAudio</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whichAudio</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">volume</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">PlayAudio</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">AUDIO_SQUEAK</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</code></pre>
+<p>Play audio according to specified audio file ID.</p>
+
+<p><em>whichAudio</em>: see AUDIO_... constants below</p>
+
+<p><em>volume</em>: [0, 99]</p>
+
+<table><thead>
+<tr>
+<th>Constant name</th>
+<th>Description</th>
+<th>Used in curriculum</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AUDIO_ENTICE</td>
+<td>Artificial squeaker</td>
+<td>No</td>
+</tr>
+<tr>
+<td>AUDIO_POSITIVE</td>
+<td>Reward sound</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AUDIO_DO</td>
+<td>Single click</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AUDIO_CLICK</td>
+<td>Clicker sound</td>
+<td>No</td>
+</tr>
+<tr>
+<td>AUDIO_SQUEAK</td>
+<td>Natural squeaker</td>
+<td>No</td>
+</tr>
+<tr>
+<td>AUDIO_NEGATIVE</td>
+<td>Descending low tone</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AUDIO_L</td>
+<td>Left touchpad sound</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AUDIO_M</td>
+<td>Middle touchpad sound</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AUDIO_R</td>
+<td>Right touchpad sound</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h2 id='playtone'>PlayTone()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">PlayTone</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">frequency</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">volume</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">slew</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">PlayTone</span><span class="p">(</span><span class="mi">440</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre>
+<p>Play specified frequency through DL speaker</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Available values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>frequency</td>
+<td>[0, 20000] Hz</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>[0, 99]</td>
+</tr>
+<tr>
+<td>slew</td>
+<td>[0, 99]</td>
+</tr>
+</tbody></table>
+
+<p><em>Setting frequency to <code>0</code> will stop the tone.</em></p>
+<h2 id='presentfoodtreat'>PresentFoodtreat()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">PresentFoodtreat</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">duration_decisec</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">PresentFoodtreat</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</code></pre>
+<p>Present foodtreat for specified duration, then close tray.</p>
+
+<p><em>duration_decisec</em>: specified amount of time (duration x 0.1 secs)</p>
+
+<p>Setting duration_decisec to 0 will cause the foodtreat to be presented  indefinitely (in which case <strong>RetractTray</strong> will need to be called to retract).</p>
+<h2 id='presentandcheckfoodtreat'>PresentAndCheckFoodtreat()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">PresentAndCheckFoodtreat</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">duration_ms</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">pact_state</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">PACT_BEFORE_PRESENT</span>  <span class="n">hub</span><span class="p">.</span><span class="n">PACT_</span><span class="p">...</span> <span class="n">are</span> <span class="n">states</span> <span class="n">of</span> <span class="n">PresentAndCHeckFoodtreat</span> <span class="n">state</span> <span class="n">machine</span>
+<span class="c1">// Run until one of two possible final states
+</span><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">pact_state</span> <span class="o">==</span> <span class="n">hub</span><span class="p">.</span><span class="n">PACT_RESPONSE_FOODTREAT_TAKEN</span> <span class="o">||</span> <span class="n">pact_state</span> <span class="o">==</span> <span class="n">hub</span><span class="p">.</span><span class="n">PACT_RESPONSE_FOODTREAT_NOT_TAKEN</span><span class="p">))</span>  
+<span class="p">{</span>
+    <span class="n">pact_state</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">PresentAndCheckFoodtreat</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>  <span class="n">state</span> <span class="n">machine</span>
+    <span class="n">hub</span><span class="p">.</span><span class="n">Run</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<p>Must be run in a loop as a state machine.</p>
+
+<p>Present foodtreat for specified duration (<em>duration_ms</em> in millseconds) and returns a PACT_... state (table below) to indicate if food was eaten or not (defined in this class).</p>
+
+<p>Advantages: some error checking, returns if food was eaten or not.</p>
+
+<table><thead>
+<tr>
+<th>Constant name</th>
+<th>Constant value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PACT_BEFORE_PRESENT</td>
+<td>10</td>
+<td>After platter has returned and is in staging mode. Foodmachine may still be active.</td>
+</tr>
+<tr>
+<td>PACT_PLATTER_OUT</td>
+<td>11</td>
+<td>Platter has been sent out.</td>
+</tr>
+<tr>
+<td>PACT_WAIT_TIL_BACK</td>
+<td>12</td>
+<td>Platter is out. Waiting for it to come back.</td>
+</tr>
+<tr>
+<td>PACT_WAIT_DIAG</td>
+<td>13</td>
+<td>Tray is waiting under the singulator.</td>
+</tr>
+<tr>
+<td>PACT_RESPONSE_FOODTREAT_NOT_TAKEN</td>
+<td>0</td>
+<td>Foodtreat wasn&#39;t read as taken.</td>
+</tr>
+<tr>
+<td>PACT_RESPONSE_FOODTREAT_TAKEN</td>
+<td>1</td>
+<td>Food treat was read as taken.</td>
+</tr>
+</tbody></table>
+<h2 id='retracttray'>RetractTray()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">RetractTray</span><span class="p">()</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">RetractTray</span><span class="p">();</span>
+</code></pre>
+<p>Retract the tray (for use with <code>PresentFoodtreat(0)</code>)</p>
+<h2 id='getneedsdireset'>GetNeedsDIReset()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">GetNeedsDIReset</span><span class="p">()</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">GetNeedsDIReset</span><span class="p">();</span>
+</code></pre>
+<p>Return value of _csf_needs_DI_reset</p>
+
+<p>If it returns <strong>true</strong> the Hub&#39;s capacitive touchpads need to be reset. </p>
+
+<p><em>(see Run function implementation for use)</em></p>
+<h2 id='setdiresetlock-bool'>SetDIResetLock(bool)</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetDIResetLock</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span>
+<span class="c1">// ... do setup that gets game ready to be played ...
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetDIResetLock</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="c1">// ... gameplay code ...
+// end of interaction. Beginning of inter-game period 
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetDIResetLock</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</code></pre>
+<p>Pass 1/true to prevent DI (capacitive sensor) reset, set to 0 to allow it - allows a game to control when hub/dli may reset the capacitive touch sensor (DI) board</p>
+<h2 id='resetdi'>ResetDI()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">ResetDI</span><span class="p">();</span>
+</code></pre>
+<p>Reset the capacitive touch sensor board.</p>
+
+<aside class="warning"> Make sure when this functionn is called there's no need to use the touchpads.</aside>
+
+<p><em>(see Run function implementation for use)</em></p>
+<h2 id='resetfoodmachine'>ResetFoodMachine()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">ResetFoodMachine</span><span class="p">();</span>
+</code></pre>
+<p>This will reset the food state machine. This can be quite helpful if and when there is a platter that&#39;s in the wrong position (e.g., after the platter was forced to stop moving).</p>
+<h2 id='getbuttonval-unsigned-char-whichbutton'>GetButtonVal(unsigned char whichButton)</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">GetButtonVal</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whichButton</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">GetButtonVal</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_LEFT</span><span class="p">);</span> <span class="c1">// get a reading from the left touchpad
+</span></code></pre>
+<p>Return analog touchpad (button) reading.</p>
+
+<p><em>whichButton</em>: see constants below</p>
+
+<table><thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BUTTON_LEFT</td>
+<td>LIGHT_LEFT</td>
+<td>Left touchpad</td>
+</tr>
+<tr>
+<td>BUTTON_MIDDLE</td>
+<td>LIGHT_MIDDLE</td>
+<td>Middle touchpad</td>
+</tr>
+<tr>
+<td>BUTTON_RIGHT</td>
+<td>LIGHT_RIGHT</td>
+<td>Right touchpad</td>
+</tr>
+</tbody></table>
+<h2 id='anybuttonpressed'>AnyButtonPressed()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">pressed</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">AnyButtonPressed</span><span class="p">();</span>
+
+<span class="k">switch</span> <span class="p">(</span><span class="n">pressed</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">case</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_LEFT</span><span class="p">:</span>
+    <span class="n">Log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Pressed left"</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+
+  <span class="k">case</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_MIDDLE</span><span class="p">:</span>
+    <span class="n">Log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Pressed middle"</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+
+  <span class="k">case</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_RIGHT</span><span class="p">:</span>
+    <span class="n">Log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Pressed righ"</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>Return byte representing bitwise OR of any pressed buttons.</p>
+<h2 id='isbuttonpressed-unsigned-char-whichbutton'>IsButtonPressed(unsigned char whichButton)</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">IsButtonPressed</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whichButton</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="kt">bool</span> <span class="n">is_pressed</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">IsButtonPressed</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_MIDDLE</span><span class="p">);</span>
+</code></pre>
+<p>Return bool whether specified button is pressed.</p>
+
+<p><em>whichButton</em>: see BUTTON_... constants</p>
+<h2 id='foodmachinestate'>FoodmachineState()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">PresentAndCheckFoodtreat</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+<span class="k">do</span>
+<span class="p">{</span>
+  <span class="n">yield</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">FOODMACHINE_IDLE</span> <span class="o">!=</span> <span class="n">hub</span><span class="p">.</span><span class="n">FoodmachineState</span><span class="p">());</span>
+
+</code></pre>
+<p>Return state (<em>unsigned char</em>) of food machine per the table below:</p>
+
+<table><thead>
+<tr>
+<th>Constant name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hub.FOODMACHINE_LID_OPEN</td>
+<td>0</td>
+<td>lid open</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_MOVING_HOME</td>
+<td>1</td>
+<td>moving towards home</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_CHECK</td>
+<td>2</td>
+<td>checking for foodtreat in bowl</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_DISPENSING</td>
+<td>3</td>
+<td>dispensing foodtreat</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_IDLE</td>
+<td>4</td>
+<td>waiting with food in bowl</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_MOVING_PRESENT</td>
+<td>5</td>
+<td>moving platter towards present</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_WAIT</td>
+<td>6</td>
+<td>waiting at present for a time</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_MOVING_REMOVE</td>
+<td>7</td>
+<td>moving platter towards remove</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_PLATTER_ERROR_CODE</td>
+<td>8</td>
+<td>platter jammed</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_SINGULATOR_ERROR_CODE</td>
+<td>9</td>
+<td>singulator jammed</td>
+</tr>
+<tr>
+<td>hub.FOODMACHINE_FOODTREAT_ERROR_CODE</td>
+<td>17</td>
+<td>singluator is empty API says 10, DL says 17</td>
+</tr>
+</tbody></table>
+<h2 id='getdomeopen'>GetDomeOpen()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">int</span> <span class="n">is_open</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">GetDomeOpen</span><span class="p">();</span>
+</code></pre>
+<p>Return dome open state (int)</p>
+
+<table><thead>
+<tr>
+<th>Returned</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-1</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>0</td>
+<td>closed</td>
+</tr>
+<tr>
+<td>1</td>
+<td>open</td>
+</tr>
+</tbody></table>
+<h2 id='isdomeremoved'>IsDomeRemoved()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">bool</span> <span class="n">is_removed</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">IsDomeRemoved</span><span class="p">();</span>
+</code></pre>
+<p>Return whether the Hub dome is currently removed.</p>
+<h2 id='setbuttonaudioenabled-bool-buttonaudioenabled'>SetButtonAudioEnabled(bool buttonAudioEnabled)</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetButtonAudioEnabled</span><span class="p">(</span><span class="kt">bool</span> <span class="n">buttonAudioEnabled</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span>
+<span class="kt">bool</span> <span class="n">MyGame</span><span class="p">()</span> 
+<span class="p">{</span>
+  <span class="c1">// ... do interaction setup ...
+</span>  <span class="n">hub</span><span class="p">.</span><span class="n">SetButtonAudioEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span> <span class="c1">// game is ready to go, make touchapds noisier
+</span>
+  <span class="c1">// ... game ended, turn off touchpad sounds ...
+</span>  <span class="n">hub</span><span class="p">.</span><span class="n">SetButtonAudioEnabled</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>Enable/disable standard touchpad sounds when touchpads are touched.</p>
+<h2 id='setmaxaudioamplitude-unsigned-char-max_audio_amplitude'>SetMaxAudioAmplitude(unsigned char max_audio_amplitude)</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">SetMaxAudioAmplitude</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">max_audio_amplitude</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetMaxAudioAmplitude</span><span class="p">(</span><span class="mi">80</span><span class="p">);</span>
+</code></pre>
+<p>Set max audio amplitude</p>
+
+<p><em>max_audio_amplitude</em>: [0, 99]</p>
+<h2 id='setdopollbuttons'>SetDoPollButtons()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">hub</span><span class="p">.</span><span class="n">SetDoPollButtons</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre>
+<p>Turn button polling on and off (i.e., checking of buttons&#39; states when hub.Run() is called)</p>
+<h2 id='setdopolldiagnostics'>SetDoPollDiagnostics()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="n">SetDoPollDiagnostics</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre>
+<p>Turn diagnostic polling (from the HubInterface) on and off.</p>
+<h2 id='ishuboutoffood'>IsHubOutOfFood()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="kt">bool</span> <span class="n">no_food</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">IsHubOutOfFood</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">no_food</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Particle</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"..."</span><span class="p">);</span> <span class="c1">// (not an actual Particle webhook) perhaps send an SMS message ? 
+</span><span class="p">}</span>
+</code></pre>
+<p>Return true if hub is out of food</p>
+<h2 id='issingulatorerror'>IsSingulatorError()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
+</span><span class="k">if</span> <span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">IsSingulatorError</span><span class="p">())</span>
+<span class="p">{</span>
+  <span class="n">Particle</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"..."</span><span class="p">);</span> <span class="c1">// (not an actual Particle webhook) perhaps send an SMS message ? 
+</span><span class="p">}</span>
+</code></pre>
+<p>Return true if singulator error, for example if singulator jammed</p>
+<h2 id='report'>Report()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+</span><span class="n">Report</span><span class="p">(</span><span class="n">String</span> <span class="n">play_start_time</span><span class="p">,</span> <span class="n">String</span> <span class="n">player</span><span class="p">,</span> <span class="n">String</span> <span class="n">challenge_id</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">level</span><span class="p">,</span> <span class="n">String</span> <span class="n">result</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">duration</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_presented</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_eaten</span><span class="p">)</span>
+
+<span class="c1">//////// OR, WITH EXTRA //////////
+</span>
+<span class="n">Report</span><span class="p">(</span><span class="n">String</span> <span class="n">play_start_time</span><span class="p">,</span> <span class="n">String</span> <span class="n">player</span><span class="p">,</span> <span class="n">String</span> <span class="n">challenge_id</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">level</span><span class="p">,</span> <span class="n">String</span> <span class="n">result</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">duration</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_presented</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_eaten</span><span class="p">,</span> <span class="n">String</span> <span class="n">extra</span><span class="p">)</span>
+
+<span class="c1">// EXAMPLE USAGE
+</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">pressed</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">AnyButtonPressed</span><span class="p">();</span>
+
+<span class="n">String</span> <span class="n">extras</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">format</span><span class="p">(</span> <span class="s">"{</span><span class="se">\"</span><span class="s">pressed</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">%c%c%c</span><span class="se">\"</span><span class="s">}"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b001</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b010</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b100</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">));</span>
+
+<span class="c1">// Only record when there was an interaction
+</span><span class="n">hub</span><span class="p">.</span><span class="n">Report</span><span class="p">(</span> <span class="n">Time</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">TIME_FORMAT_ISO8601_FULL</span><span class="p">),</span>    <span class="c1">// play_start_time
+</span>            <span class="s">"Pet, Clever"</span><span class="p">,</span>                                         <span class="c1">// player
+</span>            <span class="s">"LearningTheApi"</span><span class="p">,</span>                                        <span class="c1">// challenge_id
+</span>            <span class="mi">1</span><span class="p">,</span>     <span class="c1">// difficulty increases with level. So level 1 is 3 pads, level 2 is 2 pads, level 3 is 1 pad
+</span>            <span class="s">"my_result, // result</span><span class="err">
+</span><span class="s">            0, // (ms) duration</span><span class="err">
+</span><span class="s">            1,   // since we're presenting foodtreats 100% of the time</span><span class="err">
+</span><span class="s">            1 ? foodtreat_state == hub.PACT_RESPONSE_FOODTREAT_TAKEN : 0,// foodtreat_eaten</span><span class="err">
+</span><span class="s">            extras</span><span class="err">
+</span><span class="s">        );</span><span class="err">
+</span></code></pre>
+<p>Send a report formatted in JSON to the Particle Cloud with Particle.publish(). The standard name for the variable is &quot;report&quot;. There are 8 standard values.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Datatype</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>challenge_id</td>
+<td>ID of current challenge</td>
+<td>c string</td>
+</tr>
+<tr>
+<td>play_start_time</td>
+<td>UTC start time of game</td>
+<td>String</td>
+</tr>
+<tr>
+<td>player</td>
+<td>string id of player</td>
+<td>char</td>
+</tr>
+<tr>
+<td>result</td>
+<td>game result</td>
+<td>c string</td>
+</tr>
+<tr>
+<td>level</td>
+<td>game level</td>
+<td>unsigned int</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>duration of game in ms</td>
+<td>unsigned int</td>
+</tr>
+<tr>
+<td>foodtreat_presented</td>
+<td>if food was presented</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>foodtreat_eaten</td>
+<td>if food was eaten</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>extra</td>
+<td>custom field for extra metrics</td>
+<td>char</td>
+</tr>
+</tbody></table>
+
+<p><em>Return</em><br>
+ * True if successful, False otherwise         </p>
+<h2 id='report-string-play_start_time-string-player-string-challenge_id-uint32_t-level-string-result-uint32_t-duration-bool-foodtreat_presented-bool-foodtreat_eaten-string-extra'>Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)</h2>
+<p>As above, send a report message with standard fields and extra field to the particle cloud, including a JSON-formatted &quot;extra&quot; field. Returns true if successful.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="cpp">cpp</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
