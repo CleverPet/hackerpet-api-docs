@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='https://github.com/CleverPet/HackerPet'>HackerPet on Github</a>
-  - <a class="typeform-share link" href="https://cleverpet.typeform.com/to/Z47lWd" data-mode="popup" style="color:#CDCFD2;text-decoration:underline;font-size:14px;" data-hide-headers=true data-hide-footer=true data-submit-close-delay="5" target="_blank">No Hub? </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+  - <a class="typeform-share link" href="https://cleverpet.typeform.com/to/Z47lWd" data-mode="popup" style="color:#CDCFD2;text-decoration:underline;font-size:14px;" data-hide-headers=true data-hide-footer=true data-submit-close-delay="5" target="_blank">No Hub? </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-52343686-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-52343686-1'); </script>
 
 includes:
   - errors
