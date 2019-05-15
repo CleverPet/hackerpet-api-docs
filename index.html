@@ -241,7 +241,7 @@
                     <a href="#hubinterface-2" class="toc-h2 toc-link" data-title="HubInterface()">HubInterface()</a>
                   </li>
                   <li>
-                    <a href="#run" class="toc-h2 toc-link" data-title="Run(()">Run(()</a>
+                    <a href="#run" class="toc-h2 toc-link" data-title="Run()">Run()</a>
                   </li>
                   <li>
                     <a href="#isready" class="toc-h2 toc-link" data-title="IsReady()">IsReady()</a>
@@ -328,7 +328,7 @@
                     <a href="#report" class="toc-h2 toc-link" data-title="Report()">Report()</a>
                   </li>
                   <li>
-                    <a href="#report-string-play_start_time-string-player-string-challenge_id-uint32_t-level-string-result-uint32_t-duration-bool-foodtreat_presented-bool-foodtreat_eaten-string-extra" class="toc-h2 toc-link" data-title="Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)">Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)</a>
+                    <a href="#report-with-extra-field" class="toc-h2 toc-link" data-title="Report() with extra field">Report() with extra field</a>
                   </li>
               </ul>
           </li>
@@ -355,13 +355,18 @@
 <p>... and subsequently declare the variable that will be used to access your Hub&#39;s functionality.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
 
-  <span class="n">Serial1</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">38400</span><span class="p">);</span>  <span class="c1">// needed for device layer (hub) communication
-</span>  <span class="n">hub</span><span class="p">.</span><span class="n">Initialize</span><span class="p">();</span>
-
+  <span class="c1">// Initializes the hub and passes the current filename as ID for reporting
+</span>
+  <span class="n">hub</span><span class="p">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">__FILE__</span><span class="p">);</span>
+  <span class="c1">// You can also pass your own ID like so
+</span>  <span class="c1">// hub.Initialize("MyAwesomeGame");
+</span>
   <span class="c1">// Other setup commands go here
 </span><span class="p">}</span>
 </code></pre><h3 id='setup'>setup()</h3>
-<p>Within the <code>setup</code> function make sure to set up serial communication with the rest of the Hub and then initialize it.</p>
+<p>Within the <code>setup</code> function make sure to initialize the Hub, and pass it the name of your challenge.</p>
+
+<p>This name will be used in the reporting. If you just pass it <code><strong>FILE</strong></code> it will use the current file name.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
 
   <span class="n">hub</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// do 20 ms of communication with the rest of the Hub 
@@ -410,7 +415,7 @@
 </span></code></pre><h3 id='yield_wait_for-condition-ret'>yield_wait_for(<em>condition</em>, <em>ret</em>)</h3>
 <p>Wait for a condition while yielding whenever the condition is not true. Passes the <code>ret</code> parameter whenever yielding.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
-</span><span class="n">yield_sleep</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// wait for 50 us 
+</span><span class="n">yield_sleep</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// wait for 50 us
 </span></code></pre><h3 id='yield_sleep-wait_time_in_microseconds-ret'>yield_sleep(<em>wait_time_in_microseconds</em>, <em>ret</em>)</h3>
 <p>Wait for the specified number of microseconds, yielding while waiting. Uses particle micros() function, which overflows when it reaches 2^32 (i.e., every ~71.6 minutes)</p>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
@@ -423,7 +428,7 @@
 <p>Yield only if a condition is true (e.g. enough time has passed).</p>
 <h1 id='hubinterface'>HubInterface</h1><h2 id='hubinterface-2'>HubInterface()</h2>
 <p>The constructor for the HubInterface. The HubInterface is created automatically and this constructor doesn&#39;t usually need to be explicitly called.</p>
-<h2 id='run'>Run(()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
+<h2 id='run'>Run()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
 </span><span class="n">Run</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">forHowLong</span><span class="p">)</span>
 
 <span class="c1">// EXAMPLE USAGE
@@ -433,11 +438,13 @@
 <span class="p">}</span>
 
 </code></pre>
-<p>Advance the device layer state machine, with forHowLong milliseconds as the max time available to spend performing library tasks (e.g., communicating with the rest of the device). It is expected that it will be called every cycle of a loop() function.</p>
+<p>Advance the device layer state machine, with <code>forHowLong</code> milliseconds as the maximum time available to spend performing library tasks (e.g., communicating with the rest of the device). It is expected that it will be called every cycle of a loop() function.</p>
+
+<p>A good value for <code>forHowLong</code> is <code>20</code>, this makes for a nice and responsive hub.</p>
 <h2 id='isready'>IsReady()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
 </span><span class="kt">bool</span> <span class="n">ready_bool</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">IsReady</span><span class="p">();</span>
 </code></pre>
-<p>Whether or not the hub is ready to carry out other commands.</p>
+<p>Returns whether or not the hub is ready to carry out other commands.</p>
 <h2 id='setlights'>SetLights()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
 </span><span class="n">SetLights</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">whichLights</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">yellow</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">blue</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">slew</span><span class="p">)</span>
 
@@ -447,11 +454,11 @@
 <span class="c1">// Make the left and right light touchpads "white" ("equal" parts yellow and blue) with brightness 30
 </span><span class="n">hub</span><span class="p">.</span><span class="n">SetLights</span><span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_LEFT</span> <span class="o">|</span> <span class="n">hub</span><span class="p">.</span><span class="n">LIGHT_RIGHT</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre>
-<p>Set light colors with slew (overloaded below for flashing).</p>
+<p>Set light colors with slew, or fade-in time (overloaded below for flashing).</p>
 
-<p><em>whichLights</em>: see LIGHT_... constants </p>
+<p><em>whichLights</em>: see LIGHT_... constants</p>
 
-<p>In this class colors and slew can be between [0, 99] each</p>
+<p>In this class colors and slew can each have a value between [0, 99]</p>
 
 <table><thead>
 <tr>
@@ -503,9 +510,9 @@ While most humans have trichromatic vision (all the colors we can see can be des
 </code></pre>
 <p>Set light colors with slew using RGB, not BY colors </p>
 
-<p>In this class colors and slew can be between [0, 99] each</p>
-
 <p><em>whichLights</em>: see LIGHT_... constants </p>
+
+<p>In this class colors and slew can each have a value between [0, 99]</p>
 
 <table><thead>
 <tr>
@@ -557,9 +564,9 @@ While most humans have trichromatic vision (all the colors we can see can be des
 
 <p><em>on</em>: [duty cycle] * 10 ms, must be &lt; period</p>
 
-<p><em>green</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can be in [0, 99]</p>
+<p><em>yellow</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can each have a value between [0, 99]</p>
 
-<p><em>whichLights</em>: see LIGHT_... constants </p>
+<p><em>whichLights</em>: see LIGHT_... constants</p>
 
 <table><thead>
 <tr>
@@ -611,9 +618,9 @@ While most humans have trichromatic vision (all the colors we can see can be des
 
 <p><em>on</em>: [duty cycle] * 10 ms, must be &lt; period</p>
 
-<p><em>red</em>, <em>green</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can be in [0, 99]</p>
+<p><em>red</em>, <em>green</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can each have a value between [0, 99]</p>
 
-<p><em>whichLights</em>: see LIGHT_... constants </p>
+<p><em>whichLights</em>: see LIGHT_... constants</p>
 
 <table><thead>
 <tr>
@@ -661,13 +668,13 @@ While most humans have trichromatic vision (all the colors we can see can be des
 </code></pre>
 <p>Convenience function to randomly pick and illuminate a number of touchpad lights (numLights: how many. Max 3).</p>
 
-<p><em>returns</em> tgtLight: bitwise OR of light ID&#39;s selected as &quot;targets&quot; </p>
+<p><em>returns</em> tgtLight: bitwise OR of light ID&#39;s selected as &quot;targets&quot;</p>
 
-<p><em>period</em>: in 10 ms increments, 0=no flash </p>
+<p><em>period</em>: in 10 ms increments, 0=no flash</p>
 
-<p><em>on</em>: duty cycle, 10 ms increments. must be &lt; period </p>
+<p><em>on</em>: duty cycle, 10 ms increments. must be &lt; period</p>
 
-<p><em>yellow</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can be [0, 99] each</p>
+<p><em>yellow</em>, <em>blue</em>, <em>period</em>, <em>on</em>: can each have a value between [0, 99]</p>
 
 <aside class="notice">
 "Touchpad" and "pad" are the preferred ways to refer to the touchpads, but the code sometimes uses "button".
@@ -682,7 +689,7 @@ While most humans have trichromatic vision (all the colors we can see can be des
 
 <p><em>whichAudio</em>: see AUDIO_... constants below</p>
 
-<p><em>volume</em>: [0, 99]</p>
+<p><em>volume</em>: can have a value between [0, 99]</p>
 
 <table><thead>
 <tr>
@@ -846,9 +853,7 @@ While most humans have trichromatic vision (all the colors we can see can be des
 <span class="c1">// EXAMPLE USAGE
 </span><span class="n">hub</span><span class="p">.</span><span class="n">GetNeedsDIReset</span><span class="p">();</span>
 </code></pre>
-<p>Return value of _csf_needs_DI_reset</p>
-
-<p>If it returns <strong>true</strong> the Hub&#39;s capacitive touchpads need to be reset. </p>
+<p>If this function returns <strong>true</strong> the Hub&#39;s capacitive touchpads need to be reset.</p>
 
 <p><em>(see Run function implementation for use)</em></p>
 <h2 id='setdiresetlock-bool'>SetDIResetLock(bool)</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
@@ -859,16 +864,18 @@ While most humans have trichromatic vision (all the colors we can see can be des
 <span class="c1">// ... do setup that gets game ready to be played ...
 </span><span class="n">hub</span><span class="p">.</span><span class="n">SetDIResetLock</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 <span class="c1">// ... gameplay code ...
-// end of interaction. Beginning of inter-game period 
+// end of interaction. Beginning of inter-challenge period
 </span><span class="n">hub</span><span class="p">.</span><span class="n">SetDIResetLock</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 </code></pre>
-<p>Pass 1/true to prevent DI (capacitive sensor) reset, set to 0 to allow it - allows a game to control when hub/dli may reset the capacitive touch sensor (DI) board</p>
+<p>Pass 1/true to prevent DI (capacitive sensor) reset, set to 0 to allow it. This allows a game to control when the hub may reset the capacitive touch sensor (DI) board.</p>
+
+<p>Best practice is to lock the capacitive sensor during an interaction and unlock it when the interaction is done. This way the touchpads can be recalibrated while they aren&#39;t in use.</p>
 <h2 id='resetdi'>ResetDI()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
 </span><span class="n">hub</span><span class="p">.</span><span class="n">ResetDI</span><span class="p">();</span>
 </code></pre>
 <p>Reset the capacitive touch sensor board.</p>
 
-<aside class="warning"> Make sure when this functionn is called there's no need to use the touchpads.</aside>
+<aside class="warning"> Make sure when this functionn is called the touchpads aren't in use. This will reset the lights and touches won't be registered.</aside>
 
 <p><em>(see Run function implementation for use)</em></p>
 <h2 id='resetfoodmachine'>ResetFoodMachine()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
@@ -922,7 +929,7 @@ While most humans have trichromatic vision (all the colors we can see can be des
     <span class="k">break</span><span class="p">;</span>
 
   <span class="k">case</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_RIGHT</span><span class="p">:</span>
-    <span class="n">Log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Pressed righ"</span><span class="p">);</span>
+    <span class="n">Log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Pressed right"</span><span class="p">);</span>
     <span class="k">break</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
@@ -1043,10 +1050,10 @@ While most humans have trichromatic vision (all the colors we can see can be des
 
 <span class="c1">// EXAMPLE USAGE
 </span>
-<span class="kt">bool</span> <span class="n">MyGame</span><span class="p">()</span> 
+<span class="kt">bool</span> <span class="n">MyGame</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="c1">// ... do interaction setup ...
-</span>  <span class="n">hub</span><span class="p">.</span><span class="n">SetButtonAudioEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span> <span class="c1">// game is ready to go, make touchapds noisier
+</span>  <span class="n">hub</span><span class="p">.</span><span class="n">SetButtonAudioEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span> <span class="c1">// game is ready to go, make touchapads noisier
 </span>
   <span class="c1">// ... game ended, turn off touchpad sounds ...
 </span>  <span class="n">hub</span><span class="p">.</span><span class="n">SetButtonAudioEnabled</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
@@ -1076,21 +1083,21 @@ While most humans have trichromatic vision (all the colors we can see can be des
 </span><span class="kt">bool</span> <span class="n">no_food</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">IsHubOutOfFood</span><span class="p">();</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">no_food</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">Particle</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"..."</span><span class="p">);</span> <span class="c1">// (not an actual Particle webhook) perhaps send an SMS message ? 
+  <span class="n">Particle</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"..."</span><span class="p">);</span> <span class="c1">// (not an actual Particle webhook) perhaps send an SMS message ?
 </span><span class="p">}</span>
 </code></pre>
-<p>Return true if hub is out of food</p>
+<p>Returns <code>true</code> if hub is out of food</p>
 <h2 id='issingulatorerror'>IsSingulatorError()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// EXAMPLE USAGE
 </span><span class="k">if</span> <span class="p">(</span><span class="n">hub</span><span class="p">.</span><span class="n">IsSingulatorError</span><span class="p">())</span>
 <span class="p">{</span>
-  <span class="n">Particle</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"..."</span><span class="p">);</span> <span class="c1">// (not an actual Particle webhook) perhaps send an SMS message ? 
+  <span class="n">Particle</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"..."</span><span class="p">);</span> <span class="c1">// (not an actual Particle webhook) perhaps send an SMS message ?
 </span><span class="p">}</span>
 </code></pre>
-<p>Return true if singulator error, for example if singulator jammed</p>
+<p>Returns <code>true</code> if singulator error, for example if singulator is jammed</p>
 <h2 id='report'>Report()</h2><pre class="highlight cpp tab-cpp"><code><span class="c1">// SYNTAX
 </span><span class="n">Report</span><span class="p">(</span><span class="n">String</span> <span class="n">play_start_time</span><span class="p">,</span> <span class="n">String</span> <span class="n">player</span><span class="p">,</span> <span class="n">String</span> <span class="n">challenge_id</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">level</span><span class="p">,</span> <span class="n">String</span> <span class="n">result</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">duration</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_presented</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_eaten</span><span class="p">)</span>
 
-<span class="c1">//////// OR, WITH EXTRA //////////
+<span class="c1">//////// OR, WITH EXTRA FIELD//////////
 </span>
 <span class="n">Report</span><span class="p">(</span><span class="n">String</span> <span class="n">play_start_time</span><span class="p">,</span> <span class="n">String</span> <span class="n">player</span><span class="p">,</span> <span class="n">String</span> <span class="n">challenge_id</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">level</span><span class="p">,</span> <span class="n">String</span> <span class="n">result</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">duration</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_presented</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">foodtreat_eaten</span><span class="p">,</span> <span class="n">String</span> <span class="n">extra</span><span class="p">)</span>
 
@@ -1098,22 +1105,21 @@ While most humans have trichromatic vision (all the colors we can see can be des
 </span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">pressed</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="n">AnyButtonPressed</span><span class="p">();</span>
 
 <span class="n">String</span> <span class="n">extras</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">format</span><span class="p">(</span> <span class="s">"{</span><span class="se">\"</span><span class="s">pressed</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">%c%c%c</span><span class="se">\"</span><span class="s">}"</span><span class="p">,</span>
-            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b001</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b010</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b100</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">));</span>
+            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_LEFT</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_MIDDLE</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">pressed</span> <span class="o">&amp;</span> <span class="n">hub</span><span class="p">.</span><span class="n">BUTTON_RIGHT</span> <span class="o">?</span> <span class="sc">'1'</span> <span class="o">:</span> <span class="sc">'0'</span><span class="p">));</span>
 
 <span class="c1">// Only record when there was an interaction
 </span><span class="n">hub</span><span class="p">.</span><span class="n">Report</span><span class="p">(</span> <span class="n">Time</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">TIME_FORMAT_ISO8601_FULL</span><span class="p">),</span>    <span class="c1">// play_start_time
 </span>            <span class="s">"Pet, Clever"</span><span class="p">,</span>                                         <span class="c1">// player
-</span>            <span class="s">"LearningTheApi"</span><span class="p">,</span>                                        <span class="c1">// challenge_id
 </span>            <span class="mi">1</span><span class="p">,</span>     <span class="c1">// difficulty increases with level. So level 1 is 3 pads, level 2 is 2 pads, level 3 is 1 pad
-</span>            <span class="s">"my_result, // result</span><span class="err">
-</span><span class="s">            0, // (ms) duration</span><span class="err">
-</span><span class="s">            1,   // since we're presenting foodtreats 100% of the time</span><span class="err">
-</span><span class="s">            1 ? foodtreat_state == hub.PACT_RESPONSE_FOODTREAT_TAKEN : 0,// foodtreat_eaten</span><span class="err">
-</span><span class="s">            extras</span><span class="err">
-</span><span class="s">        );</span><span class="err">
-</span></code></pre>
+</span>            <span class="s">"my_result"</span><span class="p">,</span> <span class="c1">// result
+</span>            <span class="mi">0</span><span class="p">,</span> <span class="c1">// (ms) duration
+</span>            <span class="mi">1</span><span class="p">,</span>   <span class="c1">// since we're presenting foodtreats 100% of the time
+</span>            <span class="mi">1</span> <span class="o">?</span> <span class="n">foodtreat_state</span> <span class="o">==</span> <span class="n">hub</span><span class="p">.</span><span class="n">PACT_RESPONSE_FOODTREAT_TAKEN</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span><span class="c1">// foodtreat_eaten
+</span>            <span class="n">extras</span>
+        <span class="p">);</span>
+</code></pre>
 <p>Send a report formatted in JSON to the Particle Cloud with Particle.publish(). The standard name for the variable is &quot;report&quot;. There are 8 standard values.</p>
 
 <table><thead>
@@ -1172,8 +1178,12 @@ While most humans have trichromatic vision (all the colors we can see can be des
 
 <p><em>Return</em><br>
  * True if successful, False otherwise         </p>
-<h2 id='report-string-play_start_time-string-player-string-challenge_id-uint32_t-level-string-result-uint32_t-duration-bool-foodtreat_presented-bool-foodtreat_eaten-string-extra'>Report(String play_start_time, String player, String challenge_id, uint32_t level, String result, uint32_t duration, bool foodtreat_presented, bool foodtreat_eaten, String extra)</h2>
-<p>As above, send a report message with standard fields and extra field to the particle cloud, including a JSON-formatted &quot;extra&quot; field. Returns true if successful.</p>
+<h2 id='report-with-extra-field'>Report() with extra field</h2>
+<p>As above, send a report message with standard fields to the particle cloud, including a JSON-formatted &quot;extra&quot; field. Returns true if successful.</p>
+
+<aside class="notice">
+The `extra` field needs to be a valid JSON string for it to show up propperly in the report sheet.
+</aside>
 
       </div>
       <div class="dark-box">
