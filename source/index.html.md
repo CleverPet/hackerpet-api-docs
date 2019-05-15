@@ -1,11 +1,11 @@
 ---
-title: HackerPet Particle Library reference
+title: hackerpet Particle Library reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - cpp
 
 toc_footers:
-  - <a href='https://github.com/CleverPet/HackerPet'>HackerPet on Github</a>
+  - <a href='https://github.com/CleverPet/hackerpet'>hackerpet on Github</a>
   - <a class="typeform-share link" href="https://cleverpet.typeform.com/to/Z47lWd" data-mode="popup" style="color:#CDCFD2;text-decoration:underline;font-size:14px;" data-hide-headers=true data-hide-footer=true data-submit-close-delay="5" target="_blank">No Hub? </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-52343686-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-52343686-1'); </script>
 
 includes:
@@ -75,7 +75,7 @@ Usually, you'll have a function that gets called repeatedly within loop() that w
 
 # Yield macro "magic"
 
- The HackerPet library provides a set of macros that make programming the Hub much faster, more concise, and more easily understood. These macros let you "yield" from the function, temporarily exiting and re-entering at the same position.  Essentially, these macros grab the function's line number and then jump back to this line when the function is re-entered. This lets the funtion momentarily surrender the Photon to the HackerPet library and give it an opportunity to tell the rest of the Hub to turn on its lights, play sounds, dispense foodtreats, etc.
+ The hackerpet library provides a set of macros that make programming the Hub much faster, more concise, and more easily understood. These macros let you "yield" from the function, temporarily exiting and re-entering at the same position.  Essentially, these macros grab the function's line number and then jump back to this line when the function is re-entered. This lets the funtion momentarily surrender the Photon to the hackerpet library and give it an opportunity to tell the rest of the Hub to turn on its lights, play sounds, dispense foodtreats, etc.
 
 There are a few things to consider when using yield macros:
 
@@ -113,7 +113,7 @@ Place at end of any function that uses yield statement
 unsigned long start_ms = millis();
 while (millis() - start_ms < 1000) // Pause for 1000 milliseconds
 {
-  yield(false); // Yield program flow (e.g. to HackerPet library)
+  yield(false); // Yield program flow (e.g. to hackerpet library)
 }
 ```
 
